@@ -14,6 +14,9 @@
             {% endif %}
         </div>
         <h2 class="article-title">{{ object.title }}</h2>
+        <div>
+        {{ object.description | safe}}
+        </div>
         <p class="article-content">{{ object.content }}</p>
     </div>
 </article>
