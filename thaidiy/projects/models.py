@@ -12,18 +12,17 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     description = RichTextUploadingField(blank=True, null=True,
                                          config_name='special',
-                                         
                                          external_plugin_resources=[(
                                              'easyimage',
-                                             '/static/projects/vendor/ckeditor_plugins/easyimage/',
+                                             '/static/projects/vendor/ckeditor_plugins/easyimage/',  # nopep8
                                              'plugin.js',
                                          ), (
                                              'youtube',
-                                             '/static/projects/vendor/ckeditor_plugins/youtube/youtube/',
+                                             '/static/projects/vendor/ckeditor_plugins/youtube/youtube/',   # nopep8
                                              'plugin.js',
-                                         ) ],
+                                         )],
                                          )
-    content = models.TextField()
+
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
