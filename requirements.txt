@@ -1,4 +1,4 @@
 Django==2.1.7
 django-crispy-forms
 Pillow
-django-ckeditor
+django-ckeditor==5.0.0
