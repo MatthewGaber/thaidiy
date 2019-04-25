@@ -13,3 +13,4 @@ and add this
 
 from django.contrib.auth.decorators import login_required
 
+Get tokens etc from easy image

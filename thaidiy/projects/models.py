@@ -10,7 +10,7 @@ from django.db.models.signals import post_save
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
-    description = RichTextUploadingField(blank=True, null=True,
+    content = RichTextUploadingField(blank=True, null=True,
                                          config_name='special',
                                          external_plugin_resources=[(
                                              'easyimage',
@@ -22,7 +22,8 @@ class Post(models.Model):
                                              'plugin.js',
                                          )],
                                          )
-
+    description = models.CharField(max_length=200,
+                                   default="A description of the project")
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 

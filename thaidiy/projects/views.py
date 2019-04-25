@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import *
 from django.views.generic import (
     ListView,
@@ -7,7 +7,8 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from django.contrib.auth .mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.models import User
 
 
 def home(request):
@@ -22,6 +23,18 @@ class PostListView(ListView):
     template_name = 'projects/home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
+    paginate_by = 4
+
+
+class UserPostListView(ListView):
+    model = Post
+    template_name = 'projects/user_posts.html'
+    context_object_name = 'posts'
+    paginate_by = 4
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Post.objects.filter(author=user).order_by('-date_posted')
 
 
 class PostDetailView(DetailView):
@@ -30,7 +43,7 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'description']
+    fields = ['title', 'description', 'content']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -39,7 +52,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'description']
+    fields = ['title', 'description', 'content']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
