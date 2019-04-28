@@ -192,6 +192,6 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # For S3 to work with ckeditor
 # seems to wokr withou it
-AWS_QUERYSTRING_AUTH = False
+#AWS_QUERYSTRING_AUTH = False
 
 django_heroku.settings(locals())
