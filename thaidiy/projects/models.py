@@ -15,10 +15,6 @@ class Post(models.Model):
     content = RichTextUploadingField(blank=True, null=True,
                                          config_name='special',
                                          external_plugin_resources=[(
-                                             'easyimage',
-                                             '/static/projects/vendor/ckeditor_plugins/easyimage/',  # nopep8
-                                             'plugin.js',
-                                         ), (
                                              'youtube',
                                              '/static/projects/vendor/ckeditor_plugins/youtube/youtube/',   # nopep8
                                              'plugin.js',
