@@ -68,9 +68,6 @@ CKEDITOR_CONFIGS = {
     },
     'special': {
         'toolbar': 'Special',
-        'cloudServices_uploadUrl': 'https://33333.cke-cs.com/easyimage/upload/',  # nopep8
-        'cloudServices_tokenUrl': 'https://33333.cke-cs.com/token/dev/ijrDsqFix838Gh3wGO3F77FSW94BwcLXprJ4APSp3XQ26xsUHTi0jcb1hoBt',  # nopep8
-
         'width': 'auto',
         'toolbar_Special': [
             ['Styles', 'Format', 'Bold', 'Italic', 'Underline',
@@ -79,9 +76,9 @@ CKEDITOR_CONFIGS = {
             ['Table', 'HorizontalRule'],
             ['TextColor', 'BGColor'],
             ['Smiley', 'SpecialChar'],
-            ['EasyImageUpload'], ['Youtube'],
+            ['Image'], ['Youtube'],
         ],
-        'extraPlugins': ','.join(['easyimage', 'youtube']),
+        'extraPlugins': ','.join(['youtube']),
     }
 }
 
