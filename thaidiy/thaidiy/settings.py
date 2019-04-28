@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 # set in envirn variable both in heroku and locally
 # DEBUG = os.getenv("DEBUG_VALUE") == "True"
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['thaidiyninja.herokuapp.com']
 ADMINS = [('Matthew', 'mattgabermg@gmail.com')]
@@ -51,7 +51,7 @@ INSTALLED_APPS = [
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
-CKEDITOR_FORCE_JPEG_COMPRESSION = False
+CKEDITOR_FORCE_JPEG_COMPRESSION = True
 CKEDITOR_IMAGE_BACKEND = "pillow"
 
 
@@ -192,6 +192,6 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # For S3 to work with ckeditor
 # seems to wokr withou it
-#AWS_QUERYSTRING_AUTH = False
+# AWS_QUERYSTRING_AUTH = False
 
 django_heroku.settings(locals())
