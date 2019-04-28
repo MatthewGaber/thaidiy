@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 # set in envirn variable both in heroku and locally
 # DEBUG = os.getenv("DEBUG_VALUE") == "True"
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['thaidiyninja.herokuapp.com']
 ADMINS = [('Matthew', 'mattgabermg@gmail.com')]
@@ -48,11 +48,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'storages'
 ]
-
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
 CKEDITOR_FORCE_JPEG_COMPRESSION = True
 CKEDITOR_IMAGE_BACKEND = "pillow"
+
 
 CKEDITOR_CONFIGS = {
     'default': {
