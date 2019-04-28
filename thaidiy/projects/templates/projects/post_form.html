@@ -1,5 +1,8 @@
 {% extends "projects/base.html"%}
 {% load crispy_forms_tags %}
+{% load static %}
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
 {% block content %}
 
 <div class="content-section">
@@ -7,7 +10,7 @@
         {% csrf_token %}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">New Project</legend>
-            {{ form.media }}
+            
             {{ form|crispy }}
         </fieldset>
         <div class="form-group">
