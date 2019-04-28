@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = False
 
 ALLOWED_HOSTS = ['thaidiyninja.herokuapp.com']
-
+ADMINS = [('Matthew', 'mattgabermg@gmail.com')]
 
 # Application definition
 
