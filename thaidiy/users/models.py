@@ -29,7 +29,7 @@ class Profile(models.Model):
 
         img_read.close()
 
-# old resize code not working
+# old resize code not working outdated
     """ def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
