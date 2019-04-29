@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 # set in envirn variable both in heroku and locally
 # DEBUG = os.getenv("DEBUG_VALUE") == "True"
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['thaidiyninja.herokuapp.com']
 ADMINS = [('Matthew', 'mattgabermg@gmail.com')]
@@ -37,6 +37,7 @@ ADMINS = [('Matthew', 'mattgabermg@gmail.com')]
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'projects.apps.ProjectsConfig',
+    'shops.apps.ShopsConfig',
     'crispy_forms',
     'ckeditor',
     'ckeditor_uploader',
