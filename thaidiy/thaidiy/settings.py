@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'storages'
 ]
-window.CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+# window.CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
 CKEDITOR_FORCE_JPEG_COMPRESSION = True
