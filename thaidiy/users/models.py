@@ -30,6 +30,7 @@ class Profile(models.Model):
         img_read.close()
 
 # old resize code not working outdated
+# more
     """ def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
