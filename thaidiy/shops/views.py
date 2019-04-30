@@ -43,7 +43,7 @@ class ShopDetailView(DetailView):
 
 class ShopCreateView(LoginRequiredMixin, CreateView):
     model = Shop
-    fields = ['name', 'shopcategory', 'description', 'details', 'image']
+    fields = ['name', 'shopcategory', 'description', 'details', 'image', 'latitude', 'longitude']  # nopep8
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -52,7 +52,7 @@ class ShopCreateView(LoginRequiredMixin, CreateView):
 
 class ShopUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Shop
-    fields = ['name', 'shopcategory', 'description', 'details', 'image']
+    fields = ['name', 'shopcategory', 'description', 'details', 'image', 'latitude', 'longitude']   # nopep8
 
     def form_valid(self, form):
         form.instance.author = self.request.user

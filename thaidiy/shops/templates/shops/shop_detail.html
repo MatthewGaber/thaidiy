@@ -13,12 +13,35 @@
             {% endif %}
         </div>
         <h3 class="article-title">{{ object.name }}</h3>
-        <h3 class="article-title"></h3>{{ object.shopcategory }}</h3>
-        <h3 class="article-title"></h3>{{ object.description }}</h3>
-        <h3 class="article-title"></h3>{{ object.details }}</h3>
-        <div>
+        <h3 class="article-title">Category: {{ object.shopcategory }}</h3>
+        <h3 class="article-title">Description</h3>
+        <p>{{ object.description }}</p>
+        <h3 class="article-title">Details</h3>
+        <p>{{ object.details }}</p>
+        <div class="shop-image">
             <img src="{{ object.image.url }}">
         </div>
+        <div id="map" style="width: 100%; height: 300px;"></div>
     </div>
 </div>
-{% endblock content %}
+<script>
+
+    function initMap() {
+        const latitude = Number("{{ object.latitude }}");
+        const longitude = Number("{{ object.longitude }}");
+        var myLatLng = { lat: latitude, lng: longitude }
+        console.log(latitude);
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: myLatLng
+        });
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: "{{ object.name }}"
+        });
+    }
+
+</script>
+
+</script> {% endblock content %}

@@ -18,6 +18,9 @@ img {
   max-width: 100%;
   height: auto !important;
 }
+#map {
+  height: 100%;
+}
 ul {
   margin: 0;
 }
