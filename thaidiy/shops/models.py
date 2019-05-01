@@ -19,7 +19,7 @@ CATEGORIES = (
 
 class Shop(models.Model):
     name = models.CharField(max_length=100)
-    shopcategory = models.CharField(max_length=100, choices=CATEGORIES)
+    category = models.CharField(max_length=100, choices=CATEGORIES)
     description = models.CharField(max_length=200)
     details = models.TextField()
     image = models.ImageField(default='default.jpg', upload_to='shop_pics')

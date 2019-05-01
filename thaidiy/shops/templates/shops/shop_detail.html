@@ -13,7 +13,7 @@
             {% endif %}
         </div>
         <h3 class="article-title">{{ object.name }}</h3>
-        <h3 class="article-title">Category: {{ object.shopcategory }}</h3>
+        <h3 class="article-title">Category: {{ object.category }}</h3>
         <h3 class="article-title">Description</h3>
         <p>{{ object.description }}</p>
         <h3 class="article-title">Details</h3>
@@ -43,5 +43,5 @@
     }
 
 </script>
-
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDNaYRDFUNFXILQbo8j0qPGB7CZM2t4TQ&callback=initMap"></script>
 </script> {% endblock content %}

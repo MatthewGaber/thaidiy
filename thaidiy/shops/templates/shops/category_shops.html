@@ -1,5 +1,5 @@
 {% extends "projects/base.html"%} {% block content %} 
-<h3 class="mb-3">Shops by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h3>
+<h3 class="mb-3">Shops by {{ view.kwargs.category }} ({{ page_obj.paginator.count }})</h3>
 {% for shop in shops %}
 <article class="media content-section">
   <img class="rounded-circle article-img" src="{{ shop.author.profile.image.url }}">
@@ -7,6 +7,7 @@
     <div class="article-metadata">
       <a class="mr-2" href="{% url 'user-shops' shop.author.username %}">{{ shop.author }}</a>
       <small class="text-muted">{{ shop.date_posted|date:"d F, Y" }}</small>
+      <a class="mr-2" href="{% url 'category-shops' shop.category %}">{{ shop.category }}</a>
     </div>
     <h3>
       <a class="article-title" href="{% url 'shop-detail' shop.id %}">{{ shop.name }}</a>

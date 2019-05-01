@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 # set in envirn variable both in heroku and locally
 # DEBUG = os.getenv("DEBUG_VALUE") == "True"
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['thaidiyninja.herokuapp.com']
 ADMINS = [('Matthew', 'mattgabermg@gmail.com')]
@@ -189,11 +189,9 @@ AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
 
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
+# expires in a year from 1/5/19
+AWS_QUERYSTRING_EXPIRE = 31557600
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-# For S3 to work with ckeditor
-# seems to wokr withou it
-# AWS_QUERYSTRING_AUTH = False
 
 django_heroku.settings(locals())
