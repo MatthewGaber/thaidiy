@@ -40,7 +40,7 @@ class Shop(models.Model):
         img_read = storage.open(self.image.name, 'r')
         img = Image.open(img_read)
 
-        if img.height > 300 or img.width > 300:
+        if img.height > 600 or img.width > 600:
             try:
                 for orientation in ExifTags.TAGS.keys():
                     if ExifTags.TAGS[orientation] == 'Orientation':
@@ -53,12 +53,14 @@ class Shop(models.Model):
                     img = img.rotate(270, expand=True)
                 elif exif[orientation] == 8:
                     img = img.rotate(90, expand=True)
-                
+                                 
             except (AttributeError, KeyError, IndexError):
                 pass
 
-            output_size = (300, 300)
-            img.thumbnail(output_size)
+            basewidth = 600
+            wpercent = (basewidth/float(imager.size[0]))
+            hsize = int((float(imager.size[1])*float(wpercent)))
+            imager = imager.resize((basewidth, hsize), Image.ANTIALIAS).convert('RGB')  # nopep8
             in_mem_file = io.BytesIO()
             img.save(in_mem_file, format='JPEG')
             img_write = storage.open(self.image.name, 'w+')
