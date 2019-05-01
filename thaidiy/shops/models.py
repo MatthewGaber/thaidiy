@@ -53,14 +53,14 @@ class Shop(models.Model):
                     img = img.rotate(270, expand=True)
                 elif exif[orientation] == 8:
                     img = img.rotate(90, expand=True)
-                                 
+
             except (AttributeError, KeyError, IndexError):
                 pass
 
             basewidth = 600
-            wpercent = (basewidth/float(imager.size[0]))
-            hsize = int((float(imager.size[1])*float(wpercent)))
-            imager = imager.resize((basewidth, hsize), Image.ANTIALIAS).convert('RGB')  # nopep8
+            wpercent = (basewidth/float(img.size[0]))
+            hsize = int((float(img.size[1])*float(wpercent)))
+            img = img.resize((basewidth, hsize), Image.ANTIALIAS).convert('RGB')  # nopep8
             in_mem_file = io.BytesIO()
             img.save(in_mem_file, format='JPEG')
             img_write = storage.open(self.image.name, 'w+')
