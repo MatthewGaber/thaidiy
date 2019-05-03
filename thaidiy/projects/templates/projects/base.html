@@ -71,7 +71,9 @@
     
     <main role="main" class="container">
         <div class="row">
+            {% block columnoveride %}
             <div class="col-md-9">
+            {% endblock %}
                     {% if messages %}
                     {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}">{{ message }}</div>
@@ -79,17 +81,11 @@
                     {% endif %}
                 {% block content %}{% endblock %}
             </div>
+            
             <div class="col-md-3">
-                <div class="content-section">
-                    <h3>Suppliers</h3>
-                    <p class='text-muted'>Suppliers by category.
-                        <ul class="list-group">
-                            <li class="list-group-item list-group-item-light">Home Improvment</li>
-                            <li class="list-group-item list-group-item-light">Electronics</li>
-                            <li class="list-group-item list-group-item-light">Noodles</li>
-                        </ul>
-                    </p>
-                </div>
+                
+                {% block sidebar %}{% endblock %}
+                        
             </div>
         </div>
     </main>

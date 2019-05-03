@@ -37,6 +37,17 @@ class UserPostListView(ListView):
         return Post.objects.filter(author=user).order_by('-date_posted')
 
 
+class CategoryPostListView(ListView):
+    model = Post
+    template_name = 'projects/category_posts.html'
+    context_object_name = 'posts'
+    paginate_by = 5
+
+    def get_queryset(self):
+        # cat = get_object_or_404(Shop, category=self.kwargs.get('category'))  # nopep8
+        return Post.objects.filter(category=self.kwargs.get('category')).order_by('-date_posted')  # nopep8
+
+
 class PostDetailView(DetailView):
     model = Post
 

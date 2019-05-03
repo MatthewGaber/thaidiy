@@ -1,4 +1,6 @@
-{% extends "projects/base.html"%} {% load crispy_forms_tags %} {% block content %}
+{% extends "projects/base.html"%} {% load crispy_forms_tags %} {% block columnoveride %}
+<div class="col-md-12">
+{% endblock %}{% block content %}
 
 <div class="content-section">
     <form method="POST" enctype="multipart/form-data">

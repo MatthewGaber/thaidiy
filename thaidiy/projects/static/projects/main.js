@@ -1,6 +1,3 @@
 document.addEventListener('DOMContentLoaded', () => {
-    var limit = 0;
-    
-    
-
+    limit=o;
 });

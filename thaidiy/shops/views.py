@@ -12,8 +12,10 @@ from django.contrib.auth.models import User
 
 
 def home(request):
+    choices = Shop()
     context = {
-        'shops': Shop.objects.all(),
+        # 'shops': Shop.objects.all(),
+        'choices': Shop.objects.all(),
     }
     return render(request, 'shops/shops_home.html', context)
 
@@ -22,8 +24,15 @@ class ShopListView(ListView):
     model = Shop
     template_name = 'shops/shops_home.html'
     context_object_name = 'shops'
+    # queryset = Shop.objects.values_list('category', flat=True).distinct()
     ordering = ['-date_posted']
     paginate_by = 5
+    
+
+class SidebarListView(ListView):
+    model = Shop
+    template_name = 'projects/base.html'
+    context_object_name = 'shops'
 
 
 class UserShopListView(ListView):

@@ -18,6 +18,9 @@ img {
   max-width: 100%;
   height: auto !important;
 }
+.shop-image{
+  margin: 20px 0px 20px 0px;
+}
 #map {
   height: 100%;
   margin-bottom: 20px;
@@ -48,6 +51,15 @@ ul {
   border: 1px solid #dddddd;
   border-radius: 3px;
   margin-bottom: 20px;
+  overflow-wrap: break-word;
+}
+.content-section-sidebar{
+  background: #ffffff;
+  padding: 5px 5px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  
 }
 
 .article-title {
@@ -95,4 +107,10 @@ a.article-title:hover {
 
 .account-heading {
   font-size: 2.5rem;
+}
+
+.category-links {
+  position: absolute;
+  right: 50px;
+
 }

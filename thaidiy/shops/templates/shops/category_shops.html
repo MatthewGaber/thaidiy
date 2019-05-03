@@ -1,5 +1,7 @@
-{% extends "projects/base.html"%} {% block content %} 
-<h3 class="mb-3">Shops by {{ view.kwargs.category }} ({{ page_obj.paginator.count }})</h3>
+{% extends "projects/base.html"%} {% block columnoveride %}
+<div class="col-md-12">
+{% endblock %} {% block content %} 
+<h3 class="mb-3">{{ view.kwargs.category }} ({{ page_obj.paginator.count }})</h3>
 {% for shop in shops %}
 <article class="media content-section">
   <img class="rounded-circle article-img" src="{{ shop.author.profile.image.url }}">

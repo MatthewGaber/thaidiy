@@ -7,6 +7,7 @@ from .views import (
     PostUpdateView,
     PostDeleteView,
     UserPostListView,
+    CategoryPostListView,
 )
 
 
@@ -20,4 +21,5 @@ urlpatterns = [
          PostDeleteView.as_view(), name='post-delete'),
     path('about/', views.about, name='projects-about'),
     path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
+    path('category/<str:category>', CategoryPostListView.as_view(), name='category-posts'),  # nopep8
 ]

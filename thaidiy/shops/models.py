@@ -10,9 +10,11 @@ import io
 from django.core.files.storage import default_storage as storage
 
 CATEGORIES = (
-    ("Home", "Home"),
+    ("General", "General"),
+    ("Home DIY", "Home DIY"),
     ("Electronics", "Electronics"),
     ("Schools", "Schools"),
+    ("Restaraunts", "Restaraunts"),
     ("Noodles", "Noodles"),
 )
 
@@ -21,7 +23,7 @@ class Shop(models.Model):
     name = models.CharField(max_length=100)
     category = models.CharField(max_length=100, choices=CATEGORIES)
     description = models.CharField(max_length=200)
-    details = models.TextField()
+    details = models.TextField(max_length=10000)
     image = models.ImageField(default='default.jpg', upload_to='shop_pics')
     longitude = models.DecimalField(max_digits=22, decimal_places=16, null=True)  # nopep8
     latitude = models.DecimalField(max_digits=22, decimal_places=16, null=True)  # nopep8

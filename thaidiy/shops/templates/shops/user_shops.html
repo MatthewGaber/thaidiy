@@ -1,4 +1,6 @@
-{% extends "projects/base.html"%} {% block content %} 
+{% extends "projects/base.html"%} {% block columnoveride %}
+<div class="col-md-12">
+{% endblock %}{% block content %} 
 <h3 class="mb-3">Shops by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h3>
 {% for shop in shops %}
 <article class="media content-section">

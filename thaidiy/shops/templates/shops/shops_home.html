@@ -8,7 +8,7 @@
     <div class="article-metadata">
       <a class="mr-2" href="{% url 'user-shops' shop.author.username %}">{{ shop.author }}</a>
       <small class="text-muted">{{ shop.date_posted|date:"d F, Y" }}</small>
-      <a class="mr-2" href="{% url 'category-shops' shop.category %}">{{ shop.category }}</a>
+      <a class="category-links article-title" href="{% url 'category-shops' shop.category %}">{{ shop.category }}</a>
     </div>
     <h3>
       <a class="article-title" href="{% url 'shop-detail' shop.id %}">{{ shop.name }}</a>
@@ -39,4 +39,19 @@
 
     {% endif %}
 {% endblock content %}
+
+{% block sidebar %}
+  <div class="content-section-sidebar">
+      <h3>Shops</h3>
+      <p class='text-muted'>by category
+          <ul class="list-group">
+              {% for shop in shops %}
+              {% ifchanged %}
+              <li class="list-group-item list-group-item-light"><a class="article-title" href="{% url 'category-shops' shop.category %}">{{ shop.category }}</a></li>
+              {% endifchanged %} 
+          {% endfor %}
+          </ul>
+      </p>
+  </div>
+{% endblock sidebar%}
     
