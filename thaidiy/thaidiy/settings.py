@@ -29,6 +29,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # DEBUG = os.getenv("DEBUG_VALUE") == "True"
 DEBUG = False
 
+
 ALLOWED_HOSTS = ['thaidiyninja.herokuapp.com']
 ADMINS = [('Matthew', 'mattgabermg@gmail.com')]
 
