@@ -5,6 +5,8 @@ from django.urls import reverse
 from PIL import Image, ExifTags
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 import io
 from django.core.files.storage import default_storage as storage
@@ -24,11 +26,18 @@ class Shop(models.Model):
     category = models.CharField(max_length=100, choices=CATEGORIES)
     description = models.CharField(max_length=200)
     details = models.TextField(max_length=10000)
-    image = models.ImageField(default='default.jpg', upload_to='shop_pics')
+    image = models.ImageField(default='default.jpg', upload_to='shop_pics')  # nopep8
     longitude = models.DecimalField(max_digits=22, decimal_places=16, null=True)  # nopep8
     latitude = models.DecimalField(max_digits=22, decimal_places=16, null=True)  # nopep8
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def clean(self):
+        if self.image.width > 3000 or self.image.height > 3000:
+            raise ValidationError(
+                _('Max width and height is 3000 pixels, width = %(value)s and height = %(hvalue)s '),  # nopep8
+                params={'value': self.image.width, 'hvalue': self.image.height},  # nopep8
+            )
 
     def __str__(self):
         return f"{self.name}"

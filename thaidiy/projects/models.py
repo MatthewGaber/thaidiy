@@ -6,6 +6,8 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from PIL import Image
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 # todo add category models
 CATEGORIES = (
@@ -30,10 +32,17 @@ class Post(models.Model):
                                              'plugin.js',
                                          )],
                                          )
-    description = models.CharField(max_length=200,
+    description = models.CharField(max_length=300,
                                    default="A description of the project")
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def clean(self):
+        if len(self.content) > 30000:
+            raise ValidationError(
+                _('The post is to long, with the generated html it is %(value)s characters long'),  # nopep8
+                params={'value': len(self.content)},
+            )
 
     def __str__(self):
         return f"{self.title}"

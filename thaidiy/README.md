@@ -19,3 +19,7 @@ def save_as(self, filepath):
     for orientation in ExifTags.TAGS.keys():
 
     imager = imager.resize((basewidth,hsize), Image.ANTIALIAS).convert('RGB')
+
+Post limits
+def clean(self):
+        if len(self.content) > 30000:
