@@ -20,11 +20,14 @@ from users import views as user_views
 from shops import views as shop_views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('shops/', include('shops.urls')),
     path('register/', user_views.register, name='register'),
+    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',  # nopep8
+        user_views.activate, name='activate'),
     path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(
         template_name='users/login.html'), name='login'),

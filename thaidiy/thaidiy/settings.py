@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 # set in envirn variable both in heroku and locally
 # DEBUG = os.getenv("DEBUG_VALUE") == "True"
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['thaidiyninja.herokuapp.com']
@@ -36,9 +36,7 @@ ADMINS = [('Matthew', 'mattgabermg@gmail.com')]
 # Application definition
 
 INSTALLED_APPS = [
-    'users.apps.UsersConfig',
-    'projects.apps.ProjectsConfig',
-    'shops.apps.ShopsConfig',
+    
     'crispy_forms',
     'ckeditor',
     'ckeditor_uploader',
@@ -48,7 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'storages'
+    'storages',
+    'users.apps.UsersConfig',
+    'projects.apps.ProjectsConfig',
+    'shops.apps.ShopsConfig',
 ]
 # window.CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "uploads/"
@@ -146,7 +147,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',  # nopep8
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/

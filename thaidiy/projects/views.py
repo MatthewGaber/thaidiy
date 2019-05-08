@@ -9,6 +9,7 @@ from django.views.generic import (
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 def home(request):
@@ -52,9 +53,27 @@ class PostDetailView(DetailView):
     model = Post
 
 
+class PostCommentCreate(LoginRequiredMixin, CreateView):
+    model = Comment
+    fields = ['text']
+
+    def get_context_data(self, **kwargs):
+        context = super(PostCommentCreate, self).get_context_data(**kwargs)
+        context['post'] = get_object_or_404(Post, pk=self.kwargs['pk'])
+        return context
+        
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.post = get_object_or_404(Post, pk=self.kwargs['pk'])
+        return super(PostCommentCreate, self).form_valid(form)
+
+    def get_success_url(self): 
+        return reverse('post-detail', kwargs={'pk': self.kwargs['pk']})
+
+
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'description', 'content']
+    fields = ['title', 'category', 'description', 'content']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -63,7 +82,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'description', 'content']
+    fields = ['title', 'category', 'description', 'content']
 
     def form_valid(self, form):
         form.instance.author = self.request.user

@@ -114,3 +114,19 @@ a.article-title:hover {
   right: 50px;
 
 }
+
+.comment {
+  margin: 20px 0px 20px 20px;
+  background: #ffffff;
+  padding: 10px 20px;
+  overflow-wrap: break-word;
+}
+
+.socialbuttons { 
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 40px;
+  width: 160px;
+  line-height: 10px;
+}

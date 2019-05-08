@@ -52,6 +52,3 @@ class Profile(models.Model):
             img_write.close()
 
         img_read.close()
-
-
-
