@@ -1,51 +1,59 @@
 {% extends "projects/base.html"%} {% block columnoveride %}
 <div class="col-md-12">
-{% endblock %} {% block content %}
-<div class="container">
-    <div class="media-body">
-        <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
-        <div class="article-metadata">
-            <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
-            <small class="text-muted">{{ object.date_objected|date:"d F, Y" }}</small>
-            {% if object.author == user %}
-            <div>
-                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'shop-update' object.id %}">Update</a>
-                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'shop-delete' object.id %}">Delete</a>
+    {% endblock %} {% block content %}
+    <div class="container">
+        <div class="media-body">
+            <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
+            <div class="article-metadata">
+                <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
+                <small class="text-muted">{{ object.date_posted|date:"d F, Y" }}</small>
+                {% if object.author == user %}
+                <div>
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'shop-update' object.id %}">Update</a>
+                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'shop-delete' object.id %}">Delete</a>
+                </div>
+                {% endif %}
             </div>
-            {% endif %}
+            <h3 class="article-title">{{ object.name }}</h3>
+            <h5 class="article-title">Category</h5>
+            <p>{{ object.category }}</p>
+            <h5 class="article-title">Description</h5>
+            <p>{{ object.description }}</p>
+            <h5 class="article-title">Details</h5>
+            <p>{{ object.details }}</p>
+            <div class="shop-image">
+                <img src="{{ object.image.url }}">
+            </div>
+            <h5 class="article-title">Location</h5>
+            <div id="map" style="width: 100%; height: 300px;"></div>
         </div>
-        <h3 class="article-title">{{ object.name }}</h3>
-        <h5 class="article-title">Category: {{ object.category }}</h5>
-        <h5 class="article-title">Description</h5>
-        <p>{{ object.description }}</p>
-        <h5 class="article-title">Details</h5>
-        <p>{{ object.details }}</p>
-        <div class="shop-image">
-            <img src="{{ object.image.url }}">
+        <div class="socialbuttons">
+            <div class="fb-share-button" data-href="{{ request.build_absolute_uri }}" data-layout="button" data-size="large">
+                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fthaidiy.herokuapp.com%2F&amp;src=sdkpreparse"
+                    class="fb-xfbml-parse-ignore">Share</a>
+            </div>
+            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false" data-size="large">Tweet</a>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
-        <div id="map" style="width: 100%; height: 300px;"></div>
+
     </div>
-    <div id="disqus_thread"></div>
+    <script>
 
-</div>
-<script>
+        function initMap() {
+            const latitude = Number("{{ object.latitude }}");
+            const longitude = Number("{{ object.longitude }}");
+            var myLatLng = { lat: latitude, lng: longitude }
+            console.log(latitude);
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: myLatLng
+            });
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: "{{ object.name }}"
+            });
+        }
 
-    function initMap() {
-        const latitude = Number("{{ object.latitude }}");
-        const longitude = Number("{{ object.longitude }}");
-        var myLatLng = { lat: latitude, lng: longitude }
-        console.log(latitude);
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 12,
-            center: myLatLng
-        });
-        var marker = new google.maps.Marker({
-            position: myLatLng,
-            map: map,
-            title: "{{ object.name }}"
-        });
-    }
-
-</script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDNaYRDFUNFXILQbo8j0qPGB7CZM2t4TQ&callback=initMap"></script>
-</script> {% endblock content %}
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDNaYRDFUNFXILQbo8j0qPGB7CZM2t4TQ&callback=initMap"></script> {% endblock content %}
