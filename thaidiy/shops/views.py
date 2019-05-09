@@ -9,6 +9,7 @@ from django.views.generic import (
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 def home(request):
@@ -59,6 +60,24 @@ class CategoryShopListView(ListView):
 
 class ShopDetailView(DetailView):
     model = Shop
+
+
+class ShopCommentCreate(LoginRequiredMixin, CreateView):
+    model = Comment
+    fields = ['text']
+
+    def get_context_data(self, **kwargs):
+        context = super(ShopCommentCreate, self).get_context_data(**kwargs)
+        context['shop'] = get_object_or_404(Shop, pk=self.kwargs['pk'])
+        return context
+        
+    def form_valid(self, form):
+        form.instance.comment_author = self.request.user
+        form.instance.shop = get_object_or_404(Shop, pk=self.kwargs['pk'])
+        return super(ShopCommentCreate, self).form_valid(form)
+
+    def get_success_url(self): 
+        return reverse('shop-detail', kwargs={'pk': self.kwargs['pk']})
 
 
 class ShopCreateView(LoginRequiredMixin, CreateView):

@@ -8,6 +8,7 @@ from .views import (
     ShopDeleteView,
     UserShopListView,
     CategoryShopListView,
+    ShopCommentCreate,
     )
 
 
@@ -21,4 +22,5 @@ urlpatterns = [
          ShopDeleteView.as_view(), name='shop-delete'),
     path('user/<str:username>', UserShopListView.as_view(), name='user-shops'),
     path('category/<str:category>', CategoryShopListView.as_view(), name='category-shops'),  # nopep8
+    path('shop/<int:pk>/comment/', ShopCommentCreate.as_view(), name='shop-comment'),  # nopep8
          ]

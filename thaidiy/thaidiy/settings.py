@@ -35,8 +35,7 @@ ADMINS = [('Matthew', 'mattgabermg@gmail.com')]
 
 # Application definition
 
-INSTALLED_APPS = [
-    
+INSTALLED_APPS = [ 
     'crispy_forms',
     'ckeditor',
     'ckeditor_uploader',
@@ -84,7 +83,16 @@ CKEDITOR_CONFIGS = {
             ['Smiley', 'SpecialChar'],
             ['Image'], ['Youtube'],
         ],
-        'extraPlugins': ','.join(['youtube']),
+        'extraPlugins': ','.join(['youtube', 'notification']),
+        'removeDialogTabs': ';'.join([
+            'image:advanced',
+            'image:Link',
+            'link:upload',
+            'table:advanced',
+            'tableProperties:advanced',
+        ]),
+        'linkShowTargetTab': False,
+        'linkShowAdvancedTab': False,
     }
 }
 
@@ -153,7 +161,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Bangkok'
 
 USE_I18N = True
 

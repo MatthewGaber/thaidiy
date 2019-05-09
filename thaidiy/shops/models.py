@@ -79,3 +79,18 @@ class Shop(models.Model):
             img_write.close()
 
         img_read.close()
+
+
+class Comment(models.Model):
+    shop = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='comments')  # nopep8
+    comment_author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='shop_comment_author')  # nopep8
+    text = models.TextField(max_length=2048, blank=True)
+    created_date = models.DateTimeField(default=timezone.now)
+    approved_comment = models.BooleanField(default=False)
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return self.text

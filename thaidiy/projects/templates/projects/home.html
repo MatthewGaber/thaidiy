@@ -6,9 +6,9 @@
       <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
       <small class="text-muted">{{ post.date_posted|date:"d F, Y" }}</small>
     </div>
-    <h3>
+    <h4>
       <a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a>
-    </h3>
+    </h4>
     <p class="article-content">{{ post.description | safe }}</p>
     <p class="article-content">Comments: {{ post.comments.count }}</p>
   </div>
@@ -41,7 +41,7 @@
 
 {% block sidebar %}
   <div class="content-section-sidebar">
-      <h3>Posts</h3>
+      <h4>Posts</h4>
       <p class='text-muted'>by category
           <ul class="list-group">
               {% for post in posts %}

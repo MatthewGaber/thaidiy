@@ -10,9 +10,9 @@
       <small class="text-muted">{{ shop.date_posted|date:"d F, Y" }}</small>
       <a class="category-links article-title" href="{% url 'category-shops' shop.category %}">{{ shop.category }}</a>
     </div>
-    <h3>
+    <h4>
       <a class="article-title" href="{% url 'shop-detail' shop.id %}">{{ shop.name }}</a>
-    </h3>
+    </h4>
     <p class="article-content">{{ shop.description | safe }}</p>
   </div>
 </article>
@@ -42,7 +42,7 @@
 
 {% block sidebar %}
   <div class="content-section-sidebar">
-      <h3>Shops</h3>
+      <h4>Shops</h4>
       <p class='text-muted'>by category
           <ul class="list-group">
               {% for shop in shops %}
