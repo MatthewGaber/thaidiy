@@ -8,11 +8,11 @@
     <form method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">New Comment for <a href="{% url 'shop-detail' shop.pk %}">{{shop.name}}</a></legend>
+            <legend class="border-bottom mb-4">Update Comment</a></legend>
             {{ form|crispy }}
         </fieldset>
         <div class="form-group">
-                <button class="update-button" type="submit"><i class="far fa-check-circle"></i></button>
+            <button class="update-button" type="submit"><i class="far fa-check-circle"></i></button>
         </div>
     </form>
 </div>

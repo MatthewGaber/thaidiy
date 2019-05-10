@@ -1,5 +1,4 @@
-{% extends "projects/base.html"%} 
-{% block columnoveride %}
+{% extends "projects/base.html"%} {% block columnoveride %}
 <div class="col-md-12">
     {% endblock %} {% block content %}
     <div id="fb-root"></div>
@@ -9,11 +8,11 @@
             <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
             <div class="article-metadata">
                 <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
-                <small class="text-muted">{{ object.date_posted|date:"d F, Y" }}</small>
+                <small class="text-muted">{{ object.date_posted|date:"d F Y, H:i" }}</small>
                 {% if object.author == user %}
                 <div>
-                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
-                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+                    <a class="update-button" href="{% url 'post-update' object.id %}"><i class="far fa-edit"></i></a>
+                    <a class="delete-button" href="{% url 'post-delete' object.id %}"><i class="fas fa-trash"></i></a>
                 </div>
                 {% endif %}
             </div>
@@ -23,15 +22,22 @@
     </div>
     <hr> {% for comment in post.comments.all %}
     <div class="comment">
-        <div class="date">{{ comment.created_date }}</div>
+        <img class="rounded-circle article-img" src="{{ comment.author.profile.image.url }}">
         <strong>{{ comment.author }}</strong>
+        <small class="text-muted right">{{ comment.created_date|date:"d F Y, H:i" }}</small>
         <p>{{ comment.text|linebreaks }}</p>
+        {% if comment.author == user %}
+        <div>
+            <a class="update-button" href="{% url 'comment-update' comment.id %}"><i class="far fa-edit"></i></a>
+            <a class="delete-button" href="{% url 'comment-delete' comment.id %}"><i class="fas fa-trash"></i></a>
+        </div>
+        {% endif %}
     </div>
-     {% empty %}
+    {% empty %}
     <p>No comments</p>
     {% endfor %}
     <hr> {% if user.is_authenticated %}
-    <a class="btn btn-outline-info" href="{% url 'post-comment' post.id %}">Add comment</a>
+    <a class="add-button" href="{% url 'post-comment' post.id %}"><i class="far fa-comment-dots"></i></a>
     {% else %}
     <p>
         <a href="{% url 'login'%}?next={{request.path}}">Login</a> to add a new comment</p>

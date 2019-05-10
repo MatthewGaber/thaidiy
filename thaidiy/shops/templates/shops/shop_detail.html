@@ -1,16 +1,22 @@
 {% extends "projects/base.html"%} {% block columnoveride %}
 <div class="col-md-12">
     {% endblock %} {% block content %}
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3"></script>
     <div class="container">
         <div class="media-body">
             <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
             <div class="article-metadata">
                 <a class="mr-2" href="{% url 'user-shops' object.author.username %}">{{ object.author }}</a>
-                <small class="text-muted">{{ object.date_posted|date:"d F, Y" }}</small>
+                <small class="text-muted">{{ object.date_posted|date:"d F Y, H:i" }}</small>
                 {% if object.author == user %}
                 <div>
-                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'shop-update' object.id %}">Update</a>
-                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'shop-delete' object.id %}">Delete</a>
+                    <a class="update-button" href="{% url 'shop-update' object.id %}">
+                        <i class="far fa-edit"></i>
+                    </a>
+                    <a class="delete-button" href="{% url 'shop-delete' object.id %}">
+                        <i class="fas fa-trash"></i>
+                    </a>
                 </div>
                 {% endif %}
             </div>
@@ -30,15 +36,22 @@
     </div>
     <hr> {% for comment in shop.comments.all %}
     <div class="comment">
-        <div class="date">{{ comment.created_date }}</div>
+        <img class="rounded-circle article-img" src="{{ comment.comment_author.profile.image.url }}">
         <strong>{{ comment.comment_author }}</strong>
+        <small class="text-muted right">{{ comment.created_date|date:"d F Y, H:i" }}</small>
         <p>{{ comment.text|linebreaks }}</p>
+        {% if comment.comment_author == user %}
+        <div>
+            <a class="update-button" href="{% url 'shop-comment-update' comment.id %}"><i class="far fa-edit"></i></a>
+            <a class="delete-button" href="{% url 'shop-comment-delete' comment.id %}"><i class="fas fa-trash"></i></a>
+        </div>
+        {% endif %}
     </div>
-     {% empty %}
+    {% empty %}
     <p>No comments</p>
     {% endfor %}
     <hr> {% if user.is_authenticated %}
-    <a class="btn btn-outline-info" href="{% url 'shop-comment' shop.id %}">Add comment</a>
+    <a class="add-button" href="{% url 'shop-comment' shop.id %}"><i class="far fa-comment-dots"></i></a>
     {% else %}
     <p>
         <a href="{% url 'login'%}?next={{request.path}}">Login</a> to add a new comment</p>
@@ -71,3 +84,4 @@
 
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDNaYRDFUNFXILQbo8j0qPGB7CZM2t4TQ&callback=initMap"></script> {% endblock content %}
+    

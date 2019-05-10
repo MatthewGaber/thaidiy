@@ -130,3 +130,63 @@ a.article-title:hover {
   width: 160px;
   line-height: 10px;
 }
+.confirm-delete {
+  background-color: #f44336;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.cancel-delete {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: white;
+  padding: 4px 20px;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.update-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 4px 20px;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.add-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 4px 20px;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.paginate-button {
+  background-color: rgb(206, 127, 24);
+  color: white;
+  padding: 4px 20px;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.right {
+  float: right;
+}

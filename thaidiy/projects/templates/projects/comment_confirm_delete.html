@@ -5,12 +5,13 @@
     <form method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Delete Shop</legend>
-            <h3>Are you sure you want to delete "{{ object.name}}"</h3>
+            <legend class="border-bottom mb-4">Delete Comment</legend>
+            <h4>Are you sure you want to delete</h4>
+            <p>{{ comment.text|truncatewords:10 }}....</p>
         </fieldset>
         <div class="form-group">
             <button class="confirm-delete" type="submit">Yes</button>
-            <a class="cancel-delete" href="{% url 'shop-detail' object.id %}" >No</a>
+            <a class="cancel-delete" href="{% url 'post-detail' object.id %}" >No</a>
         </div>
     </form>
 </div>

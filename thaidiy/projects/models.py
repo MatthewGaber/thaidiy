@@ -33,7 +33,7 @@ class Post(models.Model):
                                          )],
                                          )
     description = models.CharField(max_length=300,
-                                   default="A description of the project")
+                                   default="")
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 

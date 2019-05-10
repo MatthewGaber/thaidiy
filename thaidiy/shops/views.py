@@ -27,7 +27,7 @@ class ShopListView(ListView):
     context_object_name = 'shops'
     # queryset = Shop.objects.values_list('category', flat=True).distinct()
     ordering = ['-date_posted']
-    paginate_by = 5
+    paginate_by = 6
     
 
 class SidebarListView(ListView):
@@ -40,7 +40,7 @@ class UserShopListView(ListView):
     model = Shop
     template_name = 'shops/user_shops.html'
     context_object_name = 'shops'
-    paginate_by = 5
+    paginate_by = 6
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
@@ -51,7 +51,7 @@ class CategoryShopListView(ListView):
     model = Shop
     template_name = 'shops/category_shops.html'
     context_object_name = 'shops'
-    paginate_by = 5
+    paginate_by = 6
 
     def get_queryset(self):
         # cat = get_object_or_404(Shop, category=self.kwargs.get('category'))  # nopep8
@@ -78,6 +78,36 @@ class ShopCommentCreate(LoginRequiredMixin, CreateView):
 
     def get_success_url(self): 
         return reverse('shop-detail', kwargs={'pk': self.kwargs['pk']})
+
+
+class ShopCommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):   # nopep8
+    model = Comment
+    fields = ['text']
+    template_name_suffix = '_update_form'
+
+    def test_func(self):
+        comment = self.get_object()
+        if self.request.user == comment.author:
+            return True
+        return False
+
+    def get_success_url(self):
+        shop = self.object.shop
+        return reverse_lazy('shop-detail', kwargs={'pk': shop.id})
+
+
+class ShopCommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):   # nopep8
+    model = Comment
+
+    def test_func(self):
+        comment = self.get_object()
+        if self.request.user == comment.author:
+            return True
+        return False
+
+    def get_success_url(self):
+        shop = self.object.shop
+        return reverse_lazy('shop-detail', kwargs={'pk': shop.id})
 
 
 class ShopCreateView(LoginRequiredMixin, CreateView):

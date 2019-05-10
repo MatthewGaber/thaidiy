@@ -9,7 +9,7 @@ from django.views.generic import (
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 
 def home(request):
@@ -24,14 +24,14 @@ class PostListView(ListView):
     template_name = 'projects/home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
-    paginate_by = 4
+    paginate_by = 6
 
 
 class UserPostListView(ListView):
     model = Post
     template_name = 'projects/user_posts.html'
     context_object_name = 'posts'
-    paginate_by = 4
+    paginate_by = 6
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
@@ -42,7 +42,7 @@ class CategoryPostListView(ListView):
     model = Post
     template_name = 'projects/category_posts.html'
     context_object_name = 'posts'
-    paginate_by = 5
+    paginate_by = 6
 
     def get_queryset(self):
         # cat = get_object_or_404(Shop, category=self.kwargs.get('category'))  # nopep8
@@ -69,6 +69,36 @@ class PostCommentCreate(LoginRequiredMixin, CreateView):
 
     def get_success_url(self): 
         return reverse('post-detail', kwargs={'pk': self.kwargs['pk']})
+
+
+class PostCommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):   # nopep8
+    model = Comment
+    fields = ['text']
+    template_name_suffix = '_update_form'
+
+    def test_func(self):
+        comment = self.get_object()
+        if self.request.user == comment.author:
+            return True
+        return False
+
+    def get_success_url(self):
+        post = self.object.post
+        return reverse_lazy('post-detail', kwargs={'pk': post.id})
+
+
+class PostCommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):   # nopep8
+    model = Comment
+
+    def test_func(self):
+        comment = self.get_object()
+        if self.request.user == comment.author:
+            return True
+        return False
+
+    def get_success_url(self):
+        post = self.object.post
+        return reverse_lazy('post-detail', kwargs={'pk': post.id})
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):

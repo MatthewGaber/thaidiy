@@ -9,6 +9,8 @@ from .views import (
     UserPostListView,
     CategoryPostListView,
     PostCommentCreate,
+    PostCommentDeleteView,
+    PostCommentUpdateView,
 )
 
 
@@ -24,4 +26,8 @@ urlpatterns = [
     path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
     path('category/<str:category>', CategoryPostListView.as_view(), name='category-posts'),  # nopep8
     path('post/<int:pk>/comment/', PostCommentCreate.as_view(), name='post-comment'),  # nopep8
+    path('comment/<int:pk>/update/',
+         PostCommentUpdateView.as_view(), name='comment-update'),
+    path('comment/<int:pk>/delete/',
+         PostCommentDeleteView.as_view(), name='comment-delete'),
 ]
