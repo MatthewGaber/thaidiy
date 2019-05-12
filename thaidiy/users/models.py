@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from PIL import Image
+from PIL import Image, ExifTags
 import io
 from django.core.files.storage import default_storage as storage
 from django.core.exceptions import ValidationError
@@ -28,25 +28,29 @@ class Profile(models.Model):
         img = Image.open(img_read)
 
         if img.height > 300 or img.width > 300:
-            try:
-                for orientation in ExifTags.TAGS.keys():
-                    if ExifTags.TAGS[orientation] == 'Orientation':
-                        break
-                exif = dict(img._getexif().items())
+            if ExifTags:
+                try:
+                    for orientation in ExifTags.TAGS.keys():
+                        if ExifTags.TAGS[orientation] == 'Orientation':
+                            break
+                    exif = dict(img._getexif().items())
 
-                if exif[orientation] == 3:
-                    img = img.rotate(180, expand=True)
-                elif exif[orientation] == 6:
-                    img = img.rotate(270, expand=True)
-                elif exif[orientation] == 8:
-                    img = img.rotate(90, expand=True)
+                    if exif[orientation] == 3:
+                        img = img.rotate(180, expand=True)
+                    elif exif[orientation] == 6:
+                        img = img.rotate(270, expand=True)
+                    elif exif[orientation] == 8:
+                        img = img.rotate(90, expand=True)
 
-            except (AttributeError, KeyError, IndexError):
-                pass
+                except (AttributeError, KeyError, IndexError):
+                    pass
             output_size = (300, 300)
             img.thumbnail(output_size)
             in_mem_file = io.BytesIO()
-            img.save(in_mem_file, format='JPEG')
+            if self.image.name.endswith('.jpg'):
+                img.save(in_mem_file, format='JPEG')
+            else:
+                img.save(in_mem_file, format='PNG')
             img_write = storage.open(self.image.name, 'w+')
             img_write.write(in_mem_file.getvalue())
             img_write.close()

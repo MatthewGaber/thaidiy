@@ -71,9 +71,12 @@ class Shop(models.Model):
             basewidth = 600
             wpercent = (basewidth/float(img.size[0]))
             hsize = int((float(img.size[1])*float(wpercent)))
-            img = img.resize((basewidth, hsize), Image.ANTIALIAS).convert('RGB')  # nopep8
+            img = img.resize((basewidth, hsize), Image.ANTIALIAS)
             in_mem_file = io.BytesIO()
-            img.save(in_mem_file, format='JPEG')
+            if self.image.name.endswith('.jpg'):
+                img.save(in_mem_file, format='JPEG')
+            else:
+                img.save(in_mem_file, format='PNG')
             img_write = storage.open(self.image.name, 'w+')
             img_write.write(in_mem_file.getvalue())
             img_write.close()
