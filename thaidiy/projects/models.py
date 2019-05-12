@@ -53,9 +53,9 @@ class Post(models.Model):
         return reverse('post-detail', kwargs={'pk': self.pk})
 
     def save(self, *args, **kwargs):
-        img = re.search('src="([^"]+)"'[4:], self.description)
+        img = re.search('src="https://thai-diy-ninja.s3.amazonaws.com/uploads([^"]+)"', self.content)
         self.first_image = img.group().strip('"')
-        super(Blog, self).save(*args, **kwargs)
+        super(Post, self).save(*args, **kwargs)
 
 
 class Comment(models.Model):
