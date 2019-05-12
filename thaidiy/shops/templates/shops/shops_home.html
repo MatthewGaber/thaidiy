@@ -3,8 +3,8 @@
 {% block content %}
 {% for shop in shops %}
 <article class="media content-section">
-  <img class="rounded-circle article-img" src="{{ shop.author.profile.image.url }}">
   <div class="media-body">
+      <img class="rounded-circle article-img" src="{{ shop.author.profile.image.url }}">
     <div class="article-metadata">
       <a class="mr-2" href="{% url 'user-shops' shop.author.username %}">{{ shop.author }}</a>
       <small class="text-muted">{{ shop.date_posted|date:"d F, Y" }}</small>
