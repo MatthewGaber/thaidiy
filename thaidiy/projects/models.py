@@ -36,6 +36,7 @@ class Post(models.Model):
                                    default="")
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    first_image = models.CharField(max_length=400, blank=True)
 
     def clean(self):
         if len(self.content) > 30000:
@@ -49,6 +50,11 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})
+
+    def save(self, *args, **kwargs):
+        img = re.search('src="([^"]+)"'[4:], self.description)
+        self.first_image = img.group().strip('"')
+        super(Blog, self).save(*args, **kwargs)
 
 
 class Comment(models.Model):

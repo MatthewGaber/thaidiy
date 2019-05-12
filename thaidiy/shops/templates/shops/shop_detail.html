@@ -1,4 +1,13 @@
-{% extends "projects/base.html"%} {% block columnoveride %}
+{% extends "projects/base.html"%} 
+{% block head %}
+<meta property="og:url"                content="{{ request.get_full_path }}" />
+<meta property="og:type"               content="article" />
+<meta property="og:title"              content="{{ object.name }}" />
+<meta property="og:description"        content="{{ object.description }}" />
+<meta property="og:image"              content="{{ object.image.url }}" />
+{% endblock %}
+
+{% block columnoveride %}
 <div class="col-md-12">
     {% endblock %} {% block content %}
     <div id="fb-root"></div>
@@ -26,7 +35,7 @@
             <h5 class="article-title">Description</h5>
             <p>{{ object.description }}</p>
             <h5 class="article-title">Details</h5>
-            <p>{{ object.details }}</p>
+            <p>{{ object.details|linebreaks }}</p>
             <div class="shop-image">
                 <img src="{{ object.image.url }}">
             </div>
