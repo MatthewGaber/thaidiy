@@ -25,7 +25,7 @@ CATEGORIES = (
 class Post(models.Model):
     title = models.CharField(max_length=100)
     category = models.CharField(max_length=100, choices=CATEGORIES, default=CATEGORIES[0])  # nopep8
-    content = RichTextUploadingField(blank=True, null=True,
+    content = RichTextUploadingField(help_text="When uploading an image to the server there is no indication anything is happening but just give it a minute or so", blank=True, null=True,  # nopep8
                                          config_name='special',
                                          external_plugin_resources=[(
                                              'youtube',
@@ -39,6 +39,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     first_image = models.CharField(max_length=400, blank=True)
 
+    # limit content length to 30000 characters
     def clean(self):
         if len(self.content) > 30000:
             raise ValidationError(
@@ -52,8 +53,9 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})
 
+    # get the first image in the editor for og tag
     def save(self, *args, **kwargs):
-        img = re.search('"https://thai-diy-ninja.s3.amazonaws.com/uploads([^"]+)"', self.content)
+        img = re.search('"https://thai-diy-ninja.s3.amazonaws.com/uploads([^"]+)"', self.content)  # nopep8
         self.first_image = img.group().strip('"')
         super(Post, self).save(*args, **kwargs)
 

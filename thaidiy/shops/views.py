@@ -28,7 +28,7 @@ class ShopListView(ListView):
     # queryset = Shop.objects.values_list('category', flat=True).distinct()
     ordering = ['-date_posted']
     paginate_by = 6
-    
+
 
 class SidebarListView(ListView):
     model = Shop
@@ -70,13 +70,13 @@ class ShopCommentCreate(LoginRequiredMixin, CreateView):
         context = super(ShopCommentCreate, self).get_context_data(**kwargs)
         context['shop'] = get_object_or_404(Shop, pk=self.kwargs['pk'])
         return context
-        
+
     def form_valid(self, form):
         form.instance.comment_author = self.request.user
         form.instance.shop = get_object_or_404(Shop, pk=self.kwargs['pk'])
         return super(ShopCommentCreate, self).form_valid(form)
 
-    def get_success_url(self): 
+    def get_success_url(self):
         return reverse('shop-detail', kwargs={'pk': self.kwargs['pk']})
 
 

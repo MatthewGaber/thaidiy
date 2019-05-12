@@ -27,8 +27,8 @@ class Shop(models.Model):
     description = models.CharField(max_length=200)
     details = models.TextField(max_length=10000)
     image = models.ImageField(default='default.jpg', upload_to='shop_pics')  # nopep8
-    longitude = models.DecimalField(max_digits=22, decimal_places=16, null=True)  # nopep8
-    latitude = models.DecimalField(max_digits=22, decimal_places=16, null=True)  # nopep8
+    longitude = models.DecimalField(max_digits=22, decimal_places=16, null=True, help_text="Will populate when pin is dropped on map")  # nopep8
+    latitude = models.DecimalField(max_digits=22, decimal_places=16, null=True, help_text="Will populate when pin is dropped on map")  # nopep8
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 

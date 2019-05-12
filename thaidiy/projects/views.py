@@ -45,7 +45,6 @@ class CategoryPostListView(ListView):
     paginate_by = 6
 
     def get_queryset(self):
-        # cat = get_object_or_404(Shop, category=self.kwargs.get('category'))  # nopep8
         return Post.objects.filter(category=self.kwargs.get('category')).order_by('-date_posted')  # nopep8
 
 
@@ -67,7 +66,7 @@ class PostCommentCreate(LoginRequiredMixin, CreateView):
         form.instance.post = get_object_or_404(Post, pk=self.kwargs['pk'])
         return super(PostCommentCreate, self).form_valid(form)
 
-    def get_success_url(self): 
+    def get_success_url(self):
         return reverse('post-detail', kwargs={'pk': self.kwargs['pk']})
 
 
