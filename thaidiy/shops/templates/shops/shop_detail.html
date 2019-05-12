@@ -1,6 +1,6 @@
 {% extends "projects/base.html"%} 
 {% block head %}
-<meta property="og:url"                content="{{ request.get_full_path }}" />
+<meta property="og:url"                content="{{ request.build_absolute_uri }}{{ object.get_absolute_url }}" />
 <meta property="og:type"               content="article" />
 <meta property="og:title"              content="{{ object.name }}" />
 <meta property="og:description"        content="{{ object.description }}" />
