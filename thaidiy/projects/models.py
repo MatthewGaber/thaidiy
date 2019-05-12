@@ -8,6 +8,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+import re
 
 # todo add category models
 CATEGORIES = (
