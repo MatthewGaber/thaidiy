@@ -1,4 +1,15 @@
+The app has been deployed at https://thaidiyninja.herokuapp.com
 
+The app will only run on localhost with debug:true
+
+AWS S3 is used for image storage with signed URL's
+
+There are 3 apps
+users
+shops
+projects
+
+The projects/Post model uses the django-ckeditor library for the wysiwyg editor, it has been customised and the project uses the repo at MatthewGaber.django-ckeditor as per requirements.txt
 
 In the django-ckeditor at MatthewGaber.django-ckeditor the following has been changed
 
@@ -23,3 +34,11 @@ def save_as(self, filepath):
 Post limits
 def clean(self):
         if len(self.content) > 30000:
+
+This tutorial was used for the CBV's and User App- https://www.youtube.com/watch?v=UmljXZIypDc&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p
+
+Pillow has been used to resize any uploaded images, specifically user profile, Shop and any images uploaded in the CKEditor.
+
+An email confirmation is sent upon registration, uses built in TokenGenerator
+
+Password can be reset via email
