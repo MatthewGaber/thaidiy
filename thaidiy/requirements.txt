@@ -32,7 +32,7 @@ mccabe==0.6.1
 monotonic==1.5
 numpy==1.16.2
 pep8==1.7.1
-Pillow==6.0.0
+Pillow==9.0.1
 pipreqs==0.4.9
 psycopg2==2.7.7
 pycodestyle==2.5.0
